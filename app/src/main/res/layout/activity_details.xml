@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailsActivity">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/country"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/textview_detalis_country"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/latitude"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/textview_detalis_latitude"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/longitude"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/textview_details_logitide"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/windProbability"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/textview_detalis_windprobility"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/when_to_go"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/textview_whentogo"/>
+
+</LinearLayout>
