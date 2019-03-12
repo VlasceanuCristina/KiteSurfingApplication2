@@ -5,4 +5,5 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="when_to_go">When to go</string>
+    <string name="apply">Apply</string>
 </resources>

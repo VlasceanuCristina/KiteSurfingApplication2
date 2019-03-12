@@ -32,5 +32,5 @@
         android:layout_marginStart="@dimen/dimen_84"
         android:padding="@dimen/dimen_16"
         android:onClick="filterButtonOnClick"
-        android:text="Apply" />
+        android:text="@string/apply" />
 </LinearLayout>

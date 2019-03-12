@@ -6,45 +6,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DetailsActivity">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/country"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:id="@+id/textview_detalis_country"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/latitude"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:id="@+id/textview_detalis_latitude"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/longitude"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:id="@+id/textview_details_logitide"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/windProbability"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:id="@+id/textview_detalis_windprobility"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/when_to_go"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:id="@+id/textview_whentogo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/country" />
+
+    <TextView
+        android:id="@+id/textview_detalis_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/latitude" />
+
+    <TextView
+        android:id="@+id/textview_detalis_latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/longitude" />
+
+    <TextView
+        android:id="@+id/textview_details_logitide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/windProbability" />
+
+    <TextView
+        android:id="@+id/textview_detalis_windprobility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/when_to_go" />
+
+    <TextView
+        android:id="@+id/textview_whentogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
