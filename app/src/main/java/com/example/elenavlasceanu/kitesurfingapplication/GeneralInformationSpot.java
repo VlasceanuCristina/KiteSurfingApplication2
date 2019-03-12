@@ -71,8 +71,10 @@ public class GeneralInformationSpot {
         this.isFavorite = isFavourite;
     }
 
-    public GeneralInformationSpot(String name, String country) {
+    public GeneralInformationSpot(String name, String country,String whenToGo,String id) {
         this.name = name;
         this.country = country;
+        this.whenToGo=whenToGo;
+        this.id=id;
     }
 }

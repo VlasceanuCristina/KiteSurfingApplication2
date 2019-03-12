@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerViewSpots;
     private List<GeneralInformationSpot> mSpots = new ArrayList<>();
+    private List<JSONObject> list = new ArrayList<JSONObject>();
     private static String token;
 
     /////////////retrofit/////////
@@ -60,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRecyclerViewSpots = findViewById(R.id.recycler_view_spots);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecyclerViewSpots.setLayoutManager(layoutManager);
         login();
         getAll();
     }
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String auxiliar = response.body().string();
                         token = auxiliar.substring(20, 30);
-                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -119,15 +125,40 @@ public class MainActivity extends AppCompatActivity {
     ///////////////////get general information about all spots///////////
 
     private void getAll() {
-        Call<List<GeneralInformationSpot>> call = userClient.getAllSpots();
-        call.enqueue(new Callback<List<GeneralInformationSpot>>() {
+        Call<ResponseBody> call = userClient.getAllSpots();
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<List<GeneralInformationSpot>> call, Response<List<GeneralInformationSpot>> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "succes", Toast.LENGTH_SHORT).show();
-                    mSpots = response.body();
+                    try {
+                        if (response.body() != null) {
+                            //Toast.makeText(MainActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
+
+                            String json = response.body().string();
+                            try {
+                                JSONObject obj = new JSONObject(json);
+                                JSONArray array = obj.getJSONArray("result");
+                                for (int i = 0; i < array.length(); i++) {
+
+                                    JSONObject object = array.getJSONObject(i);
+                                    String country = object.getString("country");
+                                    String name = object.getString("name");
+                                    String whenToGo = object.getString("whenToGo");
+                                    String id = object.getString("id");
+                                    GeneralInformationSpot spot = new GeneralInformationSpot(name, country, whenToGo, id);
+                                    mSpots.add(spot);
+                                }
+                                loadDataList(mSpots);
+                            } catch (JSONException e) {
+                                Log.e("MYAPP", "unexpected JSON exception", e);
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //mSpots = response.body();
                     /////////populate recycler view/////////
-                    loadDataList(mSpots);
+                    //loadDataList(mSpots);
                 } else {
                     Toast.makeText(MainActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
@@ -135,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<List<GeneralInformationSpot>> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "error failure all spots", Toast.LENGTH_SHORT).show();
             }
         });
@@ -149,16 +180,10 @@ public class MainActivity extends AppCompatActivity {
     private void loadDataList(List<GeneralInformationSpot> spotsList) {
         //Get a reference to the RecyclerView//
 
-        mRecyclerViewSpots = findViewById(R.id.recycler_view_spots);
-        SpotAdapter spotAdapter = new SpotAdapter(spotsList);
+        SpotAdapter spotAdapter = new SpotAdapter(spotsList, MainActivity.this);
 
         //set the adapter to the recycler view
         mRecyclerViewSpots.setAdapter(spotAdapter);
-
-        //Use a LinearLayoutManager with default vertical orientation//
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        mRecyclerViewSpots.setLayoutManager(layoutManager);
 
         //Set the Adapter to the RecyclerView//
 
@@ -186,4 +211,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void display(List<GeneralInformationSpot> list) {
+
+        Iterator iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            GeneralInformationSpot student = (GeneralInformationSpot) iterator.next();
+        }
+    }
 }

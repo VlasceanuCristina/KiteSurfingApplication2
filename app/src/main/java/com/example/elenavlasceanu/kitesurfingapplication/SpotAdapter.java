@@ -22,8 +22,9 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotViewHolder> {
     private List<GeneralInformationSpot> mSpots;
     private Context mContext;
 
-    public SpotAdapter(List<GeneralInformationSpot> spots) {
+    public SpotAdapter(List<GeneralInformationSpot> spots,Context context) {
         mSpots = spots;
+        mContext=context;
     }
 
     @NonNull
@@ -35,32 +36,33 @@ public class SpotAdapter extends RecyclerView.Adapter<SpotViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SpotViewHolder spotViewHolder, int i) {
-        GeneralInformationSpot spot = mSpots.get(i);
+    public void onBindViewHolder(@NonNull SpotViewHolder spotViewHolder, int i) {
+       GeneralInformationSpot spot = mSpots.get(i);
         spotViewHolder.mTextViewSpot.setText(spot.getName());
         spotViewHolder.mTextViewCountry.setText(spot.getCountry());
-        final String id = spot.getId();
-        spotViewHolder.mlinearLayout.setOnClickListener(new View.OnClickListener() {
+        final  String id=spot.getId();
+        spotViewHolder.mItemLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public boolean onLongClick(View v) {
                 Intent intent = new Intent(mContext, DetailsActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra("id",id);
                 mContext.startActivity(intent);
+                return false;
             }
         });
+
 
         spotViewHolder.mImageButtonBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spotViewHolder.mImageButtonBookmark.setBackgroundResource(R.drawable.star_on);
+               // spotViewHolder.mImageButtonBookmark.setBackgroundResource(R.drawable.star_on);
 
                 Retrofit.Builder builder = new Retrofit.Builder()
                         .baseUrl("https://internship-2019.herokuapp.com/")
                         .addConverterFactory(GsonConverterFactory.create());
                 Retrofit retrofit = builder.build();
                 UserClient userClient = retrofit.create(UserClient.class);
-                Call<ResponseBody> call = userClient.addToFavourite(id);
+                Call<ResponseBody> call = userClient.addToFavourite("id");
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

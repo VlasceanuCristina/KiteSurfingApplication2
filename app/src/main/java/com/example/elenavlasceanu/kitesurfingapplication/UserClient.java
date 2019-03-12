@@ -39,7 +39,7 @@ public interface UserClient {
             "token: TIYUdHWud7"
     })
     @POST("api-spot-get-all")
-    Call<List<GeneralInformationSpot>> getAllSpots();
+    Call<ResponseBody> getAllSpots();
 
 
     ///////filter spots//////////
@@ -49,7 +49,7 @@ public interface UserClient {
             "token: TIYUdHWud7"
     })
     @POST("api-spot-get-all")
-    Call<List<GeneralInformationSpot>> filterSpots(@Body String country, @Body int windProbability);
+    Call<ResponseBody> filterSpots(@Body FilterCriteria filterCriteria);
 
     ///////get details about a spot/////
 
@@ -58,7 +58,7 @@ public interface UserClient {
             "token: TIYUdHWud7"
     })
     @POST("api-spot-get-details")
-    Call<Spot> getDetails(@Body String spotId);
+    Call<ResponseBody> getDetails(@Body String spotId);
 
     ///// addd to favourite/////
 
